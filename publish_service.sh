@@ -1,5 +1,5 @@
 #!/bin/bash
-pid=`ps -ef | grep run_api | grep -v grep | awk "{print $2}"`
+pid=`ps -ef | grep run_service | grep -v grep | awk "{print $2}"`
 if [[ $pid -gt 0 ]]
 then
   kill -9 $pid
@@ -17,6 +17,6 @@ else
   git pull origin master
 fi
 
-nohup python run_api.py >> logs/log.log 2 > &1 &
+nohup python run_service.py >> logs/log.log 2 > &1 &
 echo "service publish success"
   
