@@ -32,7 +32,3 @@ class Config(object):
     def get_app_port(cls):
         self = cls()
         return self.configs["maotai"].get("server.port")
-
-
-if __name__ == "__main__":
-    print(Config.get_app_port())
