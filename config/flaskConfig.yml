@@ -1,4 +1,0 @@
-server.port: 8080
-wx_path: 'D:\\wechat\\WeChat.exe'
-boot_waiting_sec: 2
-qrcode_refresh_sec: 2
