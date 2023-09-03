@@ -1,7 +1,5 @@
 import logging
-import os.path
 import subprocess
-import sys
 from time import sleep
 import win32api
 import win32con
@@ -63,9 +61,7 @@ class Wechat(object):
     def refresh_qrcode(start_x, end_y, window, interval):
         win32gui.SetForegroundWindow(window)
         img = ImageGrab.grab(bbox=(start_x-10, end_y+80, start_x+200, end_y+110))
-        img.save("img.png")
         text = pytesseract.image_to_string(img, lang='chi_sim')
-        print(text)
         if "切换" in text or "重新扫码" in text:
             win32gui.SetForegroundWindow(window)
             win32api.SetCursorPos((start_x+20, end_y+98))
@@ -91,17 +87,3 @@ class Wechat(object):
             if "WeChat" in proc.name:
                 process.append(proc)
         return process
-
-
-if __name__ == '__main__':
-    s1 = Wechat.get_login_qrcode()
-    print(s1)
-    Convertors.base64_to_png(s1)
-
-    # Wechat.close_wechat()
-
-    WMI = client.GetObject("winmgmts:")
-    processes = WMI.InstancesOf("Win32_Process")
-    for proc in processes:
-        if "WeChat" in proc.name:
-            print(proc.name)
