@@ -5,7 +5,7 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask_restful import Api
 from routers.router import api_router
-from utils.yamlUtils import parse_yaml
+from utils.configUtils import Config
 
 os.environ["NLS_LANG"] = r"SIMPLIFIED CHINESE_CHINA.UTF8"
 app = Flask(__name__)
@@ -29,8 +29,12 @@ if __name__ == '__main__':
     if logging.root.hasHandlers():
         logging.root.removeHandler(handler)
 
-    port = parse_yaml("flaskConfig.yml")["server.port"]
-    debug_flag = False if platform.system().lower() == "linux" else True
-    app.run(host="0.0.0.0", debug=debug_flag, port=port)
+    port = Config.get_app_port()
+    if flag := False if platform.system().lower() in["windows", "darwin"] else True:
+        shandler = logging.StreamHandler()
+        shandler.setLevel(logging.DEBUG)
+        shandler.setFormatter(fmt)
+        app.logger.addHandler(shandler)
+    app.run(host="0.0.0.0", debug=flag, port=port)
 
 

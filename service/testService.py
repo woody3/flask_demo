@@ -1,4 +1,4 @@
-from DAO.testDAO.testdao import testDAO
+from dao.testDAO.testdao import testDAO
 
 
 class testService(object):

@@ -1,0 +1,10 @@
+pip安装pytesseract后，不能立马使用，需要手工下载tesseract-OCR,操作步骤如下
+下载地址 https://github.com/UB-Mannheim/tesseract/wiki 或：https://digi.bib.uni-mannheim.de/tesseract/
+下载文件名为  tesseract-ocr-${os_bit}-setup-${version}.exe    ${os_bit}为 w32或w64, ${version}为tesseract版本号
+1. 双击setup.exe文件安装过程中在Choose Components 界面的Select components to install列表中，
+   打开Language data或Additional language data, 选中Download and install Chinese(Simplified) language data；
+2. 将tesseract安装目录添加到环境变量中
+3. 打开cmd窗口，输入tesseract -v 回车，出现版本号则表示安装配置成功
+4. 打开通过pip安装的pytesseract.py文件，一般情况路径是下面两个其中的一个,将文件中的tesseract_cmd 改成 tesseract的安装目录
+   1）C:\Users\${user_name}\AppData\Roaming\Python\Python{version}}\site-packages\pytesseract\pytesseract.py
+   2) ${python_path}\Lib\site-packages\pytesseract\pytesseract.py
